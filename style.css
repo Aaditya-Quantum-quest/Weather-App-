@@ -1,188 +1,440 @@
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+ }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+ html,
+ body {
+     min-height: 100vh;
+     width: 100%;
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+     background: linear-gradient(135deg, #58094F 0%, #841E62 25%, #F3AA20 50%, #2A445E 75%, #346B6D 100%);
+     overflow-x: hidden;
+ }
 
-html,
-body {
-    min-height: 100vh;
-    width: 100%;
-    font-size: 16px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f0f0;
-}
+ /* Animated background circles */
+ .bg-circle {
+     position: fixed;
+     border-radius: 50%;
+     opacity: 0.15;
+     animation: float 20s infinite ease-in-out;
+ }
 
-/* Main Container */
-.main-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);
-    padding: 20px;
-}
+ .bg-circle:nth-child(1) {
+     width: 300px;
+     height: 300px;
+     background: linear-gradient(135deg, #841E62, #F3AA20);
+     top: -150px;
+     right: -150px;
+     animation-delay: 0s;
+ }
 
-/* Weather Card */
-header {
-    background-color: white;
-    border-radius: 40px;
-    border-top-left-radius: 0px;
-    border-bottom-right-radius: 0px;
-    max-width: 400px;
-    width: 100%;
-    padding: 30px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-}
+ .bg-circle:nth-child(2) {
+     width: 400px;
+     height: 400px;
+     background: linear-gradient(135deg, #2A445E, #346B6D);
+     bottom: -200px;
+     left: -200px;
+     animation-delay: 5s;
+ }
 
-/* Form Styling */
-header form {
-    display: flex;
-    align-items: center;
-    border: 0.5px solid #5553;
-    border-radius: 30px;
-    overflow: hidden;
-}
+ .bg-circle:nth-child(3) {
+     width: 250px;
+     height: 250px;
+     background: linear-gradient(135deg, #F3AA20, #58094F);
+     top: 50%;
+     right: 10%;
+     animation-delay: 10s;
+ }
 
-header form input[type="text"] {
-    flex: 1;
-    border: none;
-    background: transparent;
-    padding: 15px 10px;
-    font-size: 16px;
-    color: black;
-    outline: none;
-}
+ @keyframes float {
 
-input::placeholder {
-    color: black;
-    font-size: 16px;
-}
+     0%,
+     100% {
+         transform: translate(0, 0) scale(1);
+     }
 
-header form button {
-    border: none;
-    background: transparent;
-    padding: 15px;
-    cursor: pointer;
-}
+     33% {
+         transform: translate(30px, -30px) scale(1.1);
+     }
 
-header form i {
-    opacity: 0.7;
-    transition: opacity 0.2s;
-}
+     66% {
+         transform: translate(-20px, 20px) scale(0.9);
+     }
+ }
 
-header form button:hover i {
-    opacity: 1;
-}
+ .main-container {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     min-height: 100vh;
+     padding: 20px;
+     position: relative;
+     z-index: 1;
+ }
 
-/* Weather Result Section */
-.result {
-    padding-top: 40px;
-    text-align: center;
-}
+ header {
+     background: rgba(255, 255, 255, 0.95);
+     backdrop-filter: blur(20px);
+     border-radius: 30px;
+     max-width: 450px;
+     width: 100%;
+     padding: 40px;
+     box-shadow: 0 20px 60px rgba(88, 9, 79, 0.4);
+     animation: slideUp 0.6s ease-out;
+     position: relative;
+     overflow: hidden;
+     border: 1px solid rgba(132, 30, 98, 0.2);
+ }
 
-/* City Name */
-.result .name {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
+ @keyframes slideUp {
+     from {
+         opacity: 0;
+         transform: translateY(30px);
+     }
 
-.result .name figcaption {
-    font-size: 25px;
-    font-weight: 500;
-}
+     to {
+         opacity: 1;
+         transform: translateY(0);
+     }
+ }
 
-.result .name img {
-    height: 20px;
-    margin-top: 5px;
-}
+ /* Decorative gradient overlay */
+ header::before {
+     content: '';
+     position: absolute;
+     top: 0;
+     left: 0;
+     right: 0;
+     height: 200px;
+     background: linear-gradient(135deg, rgba(132, 30, 98, 0.08) 0%, rgba(243, 170, 32, 0.08) 100%);
+     border-radius: 30px 30px 0 0;
+     z-index: 0;
+ }
 
-/* Temperature Display */
-.result .temperature img {
-    margin-top: 20px;
-    height: 180px;
-    background: transparent;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.2));
-}
+ header>* {
+     position: relative;
+     z-index: 1;
+ }
 
-.result .temperature figcaption span {
-    font-size: 50px;
-    font-weight: 500;
-}
+ header form {
+     display: flex;
+     align-items: center;
+     background: linear-gradient(135deg, #841E62 0%, #58094F 100%);
+     border-radius: 50px;
+     overflow: hidden;
+     box-shadow: 0 8px 20px rgba(132, 30, 98, 0.4);
+     transition: transform 0.3s ease, box-shadow 0.3s ease;
+ }
 
-.result .temperature figcaption sup {
-    font-size: 30px;
-}
+ header form:hover {
+     transform: translateY(-2px);
+     box-shadow: 0 12px 30px rgba(132, 30, 98, 0.5);
+ }
 
-/* Weather Description */
-.result .description {
-    margin: 15px 0;
-    font-size: 20px;
-    color: #333;
-}
+ header form input[type="text"] {
+     flex: 1;
+     border: none;
+     background: transparent;
+     padding: 16px 20px;
+     font-size: 16px;
+     color: white;
+     outline: none;
+ }
 
-/* Weather Details */
-header ul {
-    margin-top: 30px;
-}
+ input::placeholder {
+     color: rgba(255, 255, 255, 0.8);
+     font-size: 16px;
+ }
 
-header ul li {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 0;
-    list-style: none;
-    border-bottom: 1px solid #f0f0f0;
-}
+ header form button {
+     border: none;
+     background: rgba(255, 255, 255, 0.2);
+     padding: 16px 20px;
+     cursor: pointer;
+     transition: background 0.3s ease;
+ }
 
-header ul li span,
-header ul li i {
-    flex: 1;
-    text-align: center;
-    font-size: 18px;
-}
+ header form button:hover {
+     background: rgba(255, 255, 255, 0.3);
+ }
 
-.unit {
-    font-size: 14px;
-    margin-left: 2px;
-}
+ header form i {
+     color: white;
+     font-size: 18px;
+ }
 
-/* Accessibility Helper Class */
-.visually-hidden {
-    position: absolute;
-    left: -9999px;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-}
+ .result {
+     padding-top: 40px;
+     text-align: center;
+ }
 
-/* Responsive Design */
-@media (max-width: 480px) {
-    header {
-        padding: 20px;
-    }
+ .result .name {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     gap: 10px;
+     animation: fadeIn 0.8s ease-out 0.2s both;
+ }
 
-    .result .temperature img {
-        height: 120px;
-    }
+ .result .name i {
+     font-size: 24px;
+     background: linear-gradient(135deg, #841E62, #58094F);
+     -webkit-background-clip: text;
+     -webkit-text-fill-color: transparent;
+     background-clip: text;
+ }
 
-    .result .temperature figcaption span {
-        font-size: 36px;
-    }
+ .result .name figcaption {
+     font-size: 32px;
+     font-weight: 600;
+     background: linear-gradient(135deg, #58094F 0%, #841E62 100%);
+     -webkit-background-clip: text;
+     -webkit-text-fill-color: transparent;
+     background-clip: text;
+ }
 
-    .result .temperature figcaption sup {
-        font-size: 22px;
-    }
+ @keyframes fadeIn {
+     from {
+         opacity: 0;
+         transform: translateY(10px);
+     }
 
-    .result .description,
-    header ul li span {
-        font-size: 16px;
-    }
+     to {
+         opacity: 1;
+         transform: translateY(0);
+     }
+ }
 
-    .result .name figcaption {
-        font-size: 20px;
-    }
-}
+ .result .temperature {
+     animation: fadeIn 0.8s ease-out 0.4s both;
+ }
+
+ .result .temperature .weather-icon-container {
+     margin-top: 30px;
+     height: 160px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+
+ .result .temperature img {
+     height: 160px;
+     width: 160px;
+     filter: drop-shadow(0px 10px 30px rgba(132, 30, 98, 0.3));
+     animation: pulse 3s ease-in-out infinite;
+     object-fit: contain;
+ }
+
+ .result .temperature i.wi {
+     font-size: 120px;
+     background: linear-gradient(135deg, #2A445E, #346B6D);
+     -webkit-background-clip: text;
+     -webkit-text-fill-color: transparent;
+     background-clip: text;
+     filter: drop-shadow(0px 10px 30px rgba(132, 30, 98, 0.3));
+     animation: pulse 3s ease-in-out infinite;
+ }
+
+ @keyframes pulse {
+
+     0%,
+     100% {
+         transform: scale(1);
+     }
+
+     50% {
+         transform: scale(1.05);
+     }
+ }
+
+ .result .temperature figcaption {
+     margin-top: 20px;
+ }
+
+ .result .temperature figcaption span {
+     font-size: 64px;
+     font-weight: 700;
+     background: linear-gradient(135deg, #F3AA20 0%, #841E62 100%);
+     -webkit-background-clip: text;
+     -webkit-text-fill-color: transparent;
+     background-clip: text;
+ }
+
+ .result .temperature figcaption sup {
+     font-size: 32px;
+     background: linear-gradient(135deg, #F3AA20 0%, #841E62 100%);
+     -webkit-background-clip: text;
+     -webkit-text-fill-color: transparent;
+     background-clip: text;
+ }
+
+ .result .description {
+     margin: 20px 0;
+     font-size: 20px;
+     background: linear-gradient(135deg, #2A445E, #346B6D);
+     -webkit-background-clip: text;
+     -webkit-text-fill-color: transparent;
+     background-clip: text;
+     font-weight: 500;
+     animation: fadeIn 0.8s ease-out 0.6s both;
+ }
+
+ header ul {
+     margin-top: 35px;
+     display: grid;
+     gap: 15px;
+ }
+
+ header ul li {
+     display: grid;
+     grid-template-columns: 1fr auto 1fr;
+     align-items: center;
+     padding: 18px 25px;
+     list-style: none;
+     background: linear-gradient(135deg, rgba(132, 30, 98, 0.05) 0%, rgba(52, 107, 109, 0.05) 100%);
+     border-radius: 20px;
+     transition: all 0.3s ease;
+     animation: fadeIn 0.8s ease-out calc(0.8s + var(--delay)) both;
+     border: 1px solid rgba(243, 170, 32, 0.1);
+ }
+
+ header ul li:nth-child(1) {
+     --delay: 0s;
+ }
+
+ header ul li:nth-child(2) {
+     --delay: 0.1s;
+ }
+
+ header ul li:nth-child(3) {
+     --delay: 0.2s;
+ }
+
+ header ul li:nth-child(4) {
+     --delay: 0.3s;
+ }
+
+ header ul li:nth-child(5) {
+     --delay: 0.4s;
+ }
+
+ header ul li:nth-child(6) {
+     --delay: 0.5s;
+ }
+
+ header ul li:hover {
+     background: linear-gradient(135deg, rgba(132, 30, 98, 0.1) 0%, rgba(52, 107, 109, 0.1) 100%);
+     transform: translateX(5px);
+     box-shadow: 0 5px 15px rgba(132, 30, 98, 0.2);
+     border-color: rgba(243, 170, 32, 0.3);
+ }
+
+ header ul li span:first-child {
+     text-align: left;
+     font-weight: 500;
+     color: #58094F;
+     font-size: 16px;
+ }
+
+ header ul li i {
+     font-size: 22px;
+     background: linear-gradient(135deg, #2A445E, #346B6D);
+     -webkit-background-clip: text;
+     -webkit-text-fill-color: transparent;
+     background-clip: text;
+     padding: 0 15px;
+ }
+
+ header ul li span:last-child {
+     text-align: right;
+     font-weight: 600;
+     background: linear-gradient(135deg, #F3AA20 0%, #841E62 100%);
+     -webkit-background-clip: text;
+     -webkit-text-fill-color: transparent;
+     background-clip: text;
+     font-size: 16px;
+ }
+
+ .visually-hidden {
+     position: absolute;
+     left: -9999px;
+     width: 1px;
+     height: 1px;
+     overflow: hidden;
+ }
+
+ /* Loading animation */
+ .loading {
+     display: none;
+     margin-top: 20px;
+ }
+
+ .loading.active {
+     display: block;
+ }
+
+ .loading-spinner {
+     width: 50px;
+     height: 50px;
+     border: 4px solid rgba(132, 30, 98, 0.2);
+     border-top: 4px solid #841E62;
+     border-radius: 50%;
+     animation: spin 1s linear infinite;
+     margin: 0 auto;
+ }
+
+ @keyframes spin {
+     0% {
+         transform: rotate(0deg);
+     }
+
+     100% {
+         transform: rotate(360deg);
+     }
+ }
+
+ @media (max-width: 480px) {
+     header {
+         padding: 30px 25px;
+     }
+
+     .result .temperature .weather-icon-container {
+         height: 130px;
+     }
+
+     .result .temperature img {
+         height: 130px;
+         width: 130px;
+     }
+
+     .result .temperature i.wi {
+         font-size: 100px;
+     }
+
+     .result .temperature figcaption span {
+         font-size: 48px;
+     }
+
+     .result .temperature figcaption sup {
+         font-size: 24px;
+     }
+
+     .result .description {
+         font-size: 18px;
+     }
+
+     .result .name figcaption {
+         font-size: 26px;
+     }
+
+     header ul li {
+         padding: 15px 20px;
+     }
+
+     header ul li span,
+     header ul li i {
+         font-size: 14px;
+     }
+ }

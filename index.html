@@ -1,64 +1,89 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Weather App</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Modern Weather App</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.12/css/weather-icons.min.css" />
+  <link rel="stylesheet" href="style.css">k
+
 </head>
 
 <body>
+  <div class="bg-circle"></div>
+  <div class="bg-circle"></div>
+  <div class="bg-circle"></div>
+
   <div class="main-container">
     <header>
       <form id="weather-form">
         <label for="search" class="visually-hidden">Search city</label>
-        <input type="text" id="search" placeholder="Search" autocomplete="off" autofocus />
+        <input type="text" id="search" placeholder="Search for a city..." autocomplete="off" autofocus />
         <button type="submit">
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
       </form>
 
-      <section class="result">
-        <!-- City Name -->
+      <div class="loading" id="loading">
+        <div class="loading-spinner"></div>
+      </div>
+
+      <section class="result" id="result">
         <figure class="name" id="city">
+          <i class="fa-solid fa-location-dot"></i>
           <figcaption>LONDON</figcaption>
         </figure>
 
-        <!-- Temperature -->
         <figure class="temperature" id="temperature">
-          <img src="images/sun-clouds.png" alt="Sunny with clouds" />
+          <div class="weather-icon-container">
+            <img src="https://openweathermap.org/img/wn/04d@2x.png" alt="Weather icon" id="weatherIcon" />
+            <i class="wi wi-day-cloudy" id="weatherIconFont" style="display: none;"></i>
+          </div>
           <figcaption>
-            <span id="span1">31</span><sup>°</sup>
+            <span id="span1">31</span><sup>°C</sup>
           </figcaption>
         </figure>
 
-        <!-- Weather Description -->
-        <p class="description">Overcasting Clouds</p>
+        <p class="description" id="description">Overcast Clouds</p>
 
-        <!-- Details List -->
         <ul>
           <li>
-            <span>Clouds</span>
-            <i class="fa-solid fa-cloud"></i>
-            <span id="clouds">90<sup>%</sup></span>
+            <span>Visibility</span>
+            <i class="fa-solid fa-eye"></i>
+            <span id="visibility">10 km</span>
           </li>
           <li>
             <span>Humidity</span>
             <i class="fa-solid fa-droplet"></i>
-            <span id="humidity">66<sup>%</sup></span>
+            <span id="humidity">66%</span>
+          </li>
+          <li>
+            <span>Wind Speed</span>
+            <i class="fa-solid fa-wind"></i>
+            <span id="windSpeed">5.2 km/h</span>
+          </li>
+          <li>
+            <span>Feels Like</span>
+            <i class="fa-solid fa-temperature-half"></i>
+            <span id="feelsLike">34°C</span>
+          </li>
+          <li>
+            <span>UV Index</span>
+            <i class="fa-solid fa-sun"></i>
+            <span id="uvIndex">6</span>
           </li>
           <li>
             <span>Pressure</span>
             <i class="fa-solid fa-gauge"></i>
-            <span id="pressure">981<sup>hPa</sup></span>
+            <span id="pressure">1013 hPa</span>
           </li>
         </ul>
       </section>
     </header>
   </div>
+
   <script src="script.js"></script>
 </body>
 
